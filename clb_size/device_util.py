@@ -19,7 +19,8 @@ for folder in os.listdir(path):
             with open(vpr_file_path, 'r') as file:
                 contents = file.read()
                 # Use regex to extract the required data
-                match = re.search(r'Final critical path delay \(least slack\): (\d+\.\d+) ns', contents)
+                match = re.search(r"Device Utilization:\s*([\d.]+)", contents)
+                print(match)
                 if match:
                     data_y.append(float(match.group(1)))
                     data_x.append(ble_count)
@@ -28,7 +29,9 @@ for folder in os.listdir(path):
 
 # Plotting the data
 plt.scatter(data_x, data_y)
+
+print(data_y)
 plt.xlabel('BLE SIZE')
-plt.ylabel('Critical Path Delay (ns)')
-plt.title('Critical Path Delays vs. BLE Sizes')
+plt.ylabel('Device Utilization (%)')
+plt.title('Device Utilization vs. BLE Sizes')
 plt.show()
