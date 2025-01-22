@@ -23,6 +23,9 @@ for folder in os.listdir(path):
                 print(match)
                 if match:
                     data_y.append(float(match.group(1)))
+
+                    if ble_count == 10:
+                        ble_count += 1
                     data_x.append(ble_count)
         # Increment BLE count for each folder processed
         ble_count += 1
@@ -31,7 +34,7 @@ for folder in os.listdir(path):
 plt.scatter(data_x, data_y)
 
 print(data_y)
-plt.xlabel('BLE SIZE')
+plt.xlabel('BLE COUNT')
 plt.ylabel('Logic Block Area (um2)')
-plt.title('Logic Block Area vs. BLE Sizes')
+plt.title('Logic Block Area vs. CLB Size')
 plt.show()
